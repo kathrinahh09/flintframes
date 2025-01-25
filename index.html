@@ -1,4 +1,4 @@
-<!DOCTYPE html>  
+<!DOCTYPE html>   
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -126,10 +126,8 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .title-section {
-                height: auto;
-                background-size: cover;
+                margin: 0;
             }
-
             .title-section h1 {
                 font-size: 32px;
             }
@@ -139,17 +137,18 @@
             }
 
             .nft-gallery {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
                 gap: 15px;
             }
 
             .image-links {
+                grid-template-columns: repeat(4, 1fr);
                 gap: 5px;
-                flex-wrap: wrap;
+                flex-wrap: nowrap;
             }
 
             .image-link {
-                width: 40%;
+                width: 25%;
             }
 
             .announcement-image {
@@ -165,10 +164,7 @@
         @media (max-width: 480px) {
             .title-section {
                 margin: 0;
-                padding: 0;
-                height: auto;
             }
-
             .title-section h1 {
                 font-size: 24px;
             }
