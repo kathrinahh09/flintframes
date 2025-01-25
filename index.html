@@ -24,6 +24,7 @@
             align-items: center;
             justify-content: center;
             font-weight: 700;
+            margin: 0;
         }
 
         .title-section h1 {
@@ -124,6 +125,11 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            .title-section {
+                height: auto;
+                background-size: cover;
+            }
+
             .title-section h1 {
                 font-size: 32px;
             }
@@ -133,18 +139,17 @@
             }
 
             .nft-gallery {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(2, 1fr);
                 gap: 15px;
             }
 
             .image-links {
-                grid-template-columns: repeat(4, 1fr);
                 gap: 5px;
-                flex-wrap: nowrap;
+                flex-wrap: wrap;
             }
 
             .image-link {
-                width: 25%;
+                width: 40%;
             }
 
             .announcement-image {
@@ -158,6 +163,12 @@
         }
 
         @media (max-width: 480px) {
+            .title-section {
+                margin: 0;
+                padding: 0;
+                height: auto;
+            }
+
             .title-section h1 {
                 font-size: 24px;
             }
