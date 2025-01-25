@@ -40,7 +40,7 @@
 
         .nft-gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
             margin: 20px auto;
             max-width: 90%;
@@ -103,7 +103,7 @@
             background-size: contain;
             background-position: left;
             background-repeat: no-repeat;
-            height: 70px;
+            height: 50px;
         }
 
         .announcement-content {
@@ -167,7 +167,8 @@
             }
 
             .nft-gallery {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
             }
 
             .image-link {
@@ -186,8 +187,6 @@
 </head>
 <body>
     <div class="title-section">
-        <h1>FlintFrames NFTs</h1>
-        <p>The Stone Age Journey Begins</p>
     </div>
 
     <div class="image-links">
@@ -242,3 +241,5 @@
     </div>
 </body>
 </html>
+
+
