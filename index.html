@@ -13,30 +13,21 @@
         }
 
         .title-section {
-            background-image: url('IMAGE/TITLE.jfif');
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            height: 10vh;
-            color: rgb(255, 255, 255);
-            text-align: center;
+            height: 30vh;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            width: 70%;
-            margin: 0;
         }
-
-        .title-section h1 {
-            font-size: 4vw;
-            margin: 0;
-        }
-
-        .title-section p {
-            font-size: 2vw;
-            margin: 0;
-        }
+        
+         .title-image {
+             width: 100%;
+             height: 100%;
+             object-fit: cover;
+         }
 
         .nft-gallery {
             display: grid;
@@ -131,14 +122,6 @@
                 height: 25vh;
             }
 
-            .title-section h1 {
-                font-size: 6vw;
-            }
-
-            .title-section p {
-                font-size: 3vw;
-            }
-
             .image-links {
                 justify-content: space-evenly;
     }
@@ -159,14 +142,6 @@
         @media (max-width: 480px) {
             .title-section {
                 height: 20vh;
-            }
-
-            .title-section h1 {
-                font-size: 7vw;
-            }
-
-            .title-section p {
-                font-size: 4vw;
             }
 
             .nft-gallery {
@@ -193,7 +168,8 @@
 </head>
 <body>
     <div class="title-section">
-    </div>
+    <img src="IMAGE/TITLE.jfif" alt="Title Image" class="title-image">
+</div>
 
     <div class="image-links">
         <div class="image-link" onclick="location.href='about.html'">
