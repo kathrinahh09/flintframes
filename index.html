@@ -1,4 +1,4 @@
-<!DOCTYPE html>   
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,15 +20,15 @@
             justify-content: center;
             position: relative;
         }
-        
-         .title-image {
-             width: 100%;
-             height: auto;
-             position: absolute;
-             top: 50%;
-             left: 50%;transform: translate(-50%, -50%);
-             
-         }
+
+        .title-image {
+            width: 100%;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
 
         .nft-gallery {
             display: grid;
@@ -125,7 +125,7 @@
 
             .image-links {
                 justify-content: space-evenly;
-    }
+            }
             .image-link {
                 width: 22%;
             }
@@ -152,7 +152,7 @@
 
             .image-links {
                 justify-content: space-evenly;
-    }
+            }
             .image-link {
                 width: 22%;
             }
@@ -169,8 +169,8 @@
 </head>
 <body>
     <div class="title-section">
-    <img src="IMAGE/TITLE.jfif" alt="Title Image" class="title-image">
-</div>
+        <img src="IMAGE/TITLE.jfif" alt="Title Image" class="title-image">
+    </div>
 
     <div class="image-links">
         <div class="image-link" onclick="location.href='about.html'">
@@ -187,9 +187,6 @@
         </div>
     </div>
 
-    <div class="nft-gallery-image"></div>
-    <div style="background-image: url('IMAGE/SAMPLENFTART.jfif'); background-size: contain; background-repeat: no-repeat; background-position: center; padding: 25px; border-radius: 8px; height: 20px"></div>
-               
     <div class="nft-gallery">
         <div class="nft-item">
             <img src="IMAGE/NFTIMAGE1.jfif" alt="NFT 1">
@@ -211,18 +208,22 @@
         </div>
     </div>
 
-        <div class="announcement-image"></div>
-        <div class="announcement-content">
-            <div style="background-image: url('IMAGE/ANNOUNCEMENTBACKGROUND.jfif'); background-size: cover; background-position: center; padding: 20px; border-radius: 8px;">
-                <p>Stay tuned for our upcoming NFT drops and updates! Don't miss out on exclusive offers and news.</p>
-            </div>
-        </div>
-    </div>
-
     <div class="footer">
         <p>&copy; All ARTWORK SHOWCASED ON THIS PAGE IS THE ORIGINAL CREATION OF FLINTFRAMES AND IS PROTECTED BY COPYRIGHT LAW. UNAUTHORIZED USE, REPRODUCTION, OR DISTRIBUTION IS STRICTLY PROHIBITED. THANK YOU FOR SUPPORTING OUR STONE AGE JOURNEY.</p>
     </div>
+
+    <script>
+        window.addEventListener('resize', adjustTitleSection);
+
+        function adjustTitleSection() {
+            const titleSection = document.querySelector('.title-section');
+            const titleImage = document.querySelector('.title-image');
+            const aspectRatio = titleImage.naturalWidth / titleImage.naturalHeight;
+
+            titleSection.style.height = `${titleSection.offsetWidth / aspectRatio}px`;
+        }
+
+        adjustTitleSection(); // Call it initially
+    </script>
 </body>
 </html>
-
-
