@@ -13,21 +13,19 @@
         }
 
         .title-section {
-            width: 100%;
-            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
+            margin: 0;
+            padding: 0;
+            height: 150px;
         }
 
         .title-image {
             width: 100%;
-            height: auto;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            height: 100%;
+            object-fit: cover;
         }
 
         .nft-gallery {
@@ -120,12 +118,13 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .title-section {
-                height: 25vh;
+                height: 120px;
             }
 
             .image-links {
                 justify-content: space-evenly;
             }
+
             .image-link {
                 width: 22%;
             }
@@ -142,7 +141,7 @@
 
         @media (max-width: 480px) {
             .title-section {
-                height: 20vh;
+                height: 100px;
             }
 
             .nft-gallery {
@@ -153,6 +152,7 @@
             .image-links {
                 justify-content: space-evenly;
             }
+
             .image-link {
                 width: 22%;
             }
@@ -218,19 +218,5 @@
     <div class="footer">
         <p>&copy; All ARTWORK SHOWCASED ON THIS PAGE IS THE ORIGINAL CREATION OF FLINTFRAMES AND IS PROTECTED BY COPYRIGHT LAW. UNAUTHORIZED USE, REPRODUCTION, OR DISTRIBUTION IS STRICTLY PROHIBITED. THANK YOU FOR SUPPORTING OUR STONE AGE JOURNEY.</p>
     </div>
-
-    <script>
-        window.addEventListener('resize', adjustTitleSection);
-
-        function adjustTitleSection() {
-            const titleSection = document.querySelector('.title-section');
-            const titleImage = document.querySelector('.title-image');
-            const aspectRatio = titleImage.naturalWidth / titleImage.naturalHeight;
-
-            titleSection.style.height = `${titleSection.offsetWidth / aspectRatio}px`;
-        }
-
-        adjustTitleSection(); // Call it initially
-    </script>
 </body>
 </html>
