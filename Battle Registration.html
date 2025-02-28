@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battle Registration</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('IMAGE/backgroundimage.jfif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #fff;
+        }
+
+        .battle-registration-section {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: #fff;
+        }
+
+        h1 {
+            color: #333;
+            margin-top: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            max-width: 400px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .back-home {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .back-home:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="battle-registration-section">
+    <h1>Battle Registration</h1>
+    <p>Register to join the FlintFrames NFT Battle.</p>
+
+    <form id="battleForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" required>
+
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" required>
+
+        <label for="wallet">Wallet Address:</label>
+        <input type="text" id="wallet" required>
+
+        <button type="button" onclick="verifyNFTs()">Register & Verify NFTs</button>
+    </form>
+
+    <p id="verificationStatus"></p>
+
+    <a href="index.html" class="back-home">Back to Home</a>
+
+    <script>
+        async function verifyNFTs() {
+            let wallet = document.getElementById("wallet").value;
+            let statusElement = document.getElementById("verificationStatus");
+
+            if (!wallet) {
+                statusElement.innerHTML = "Please enter a valid wallet address.";
+                return;
+            }
+
+            statusElement.innerHTML = "Verifying NFTs... Please wait.";
+
+            // OpenSea API for checking NFTs
+            let url = `https://api.opensea.io/api/v1/assets?owner=${wallet}&order_direction=desc&limit=5`;
+
+            try {
+                let response = await fetch(url);
+                let data = await response.json();
+
+                if (data.assets.length > 0) {
+                    statusElement.innerHTML = "NFTs verified! You are registered for the battle.";
+                } else {
+                    statusElement.innerHTML = "No FlintFrames NFTs found in your wallet.";
+                }
+            } catch (error) {
+                statusElement.innerHTML = "Error fetching NFTs. Please try again.";
+            }
+        }
+    </script>
+</body>
+</html>
