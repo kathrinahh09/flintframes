@@ -52,7 +52,7 @@ body {
 .nft-item img {
     width: 100%;
     border-radius: 8px;
-    border: 2px solid #494949;
+    border: 2px solid #E8E9EB;
     transition: transform 0.3s ease;
 }
 
@@ -79,7 +79,7 @@ body {
 
 .image-link img {
     width: 100%;
-    border: 5px solid #494949;
+    border: 5px solid #E8E9EB;
     transition: transform 0.3s ease;
 }
 
@@ -127,8 +127,8 @@ body {
 
 .footer {
     text-align: center;
-    background-color: #3d3d3d;
-    color: white;
+    background-color: #E8E9EB;
+    color: black;
     padding: 10px;
     font-size: 14px;
     margin-top: 25px;
