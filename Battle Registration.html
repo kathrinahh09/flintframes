@@ -6,43 +6,32 @@
     <title>Battle Registration</title>
     <style>
         body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-image: url('IMAGE/backgroundimage.jfif');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    min-height: 100vh;
-    width: 100%;
-}
-
-
-        .battle-registration-section {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            color: #fff;
-        }
-        h1 {
-            color: #777; /* Lighter shade of gray */
-            margin-top: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
         }
 
-        p {
-            font-size: 18px;
-            color: #888; /* Lighter gray */
+        .header {
             text-align: center;
+            padding: 40px 10px 10px;
+            background-image: url('IMAGE/backgroundimage.jfif');
+            background-size: cover;
+            background-position: center;
+            color: white; /* Text now visible */
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
         }
 
         form {
             background: white;
             padding: 20px;
-            max-width: 400px;
+            max-width: 350px;
             margin: 20px auto;
             border-radius: 8px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -57,13 +46,13 @@
         }
 
         input {
-            width: 100%;
+            width: 100%; /* Fix overflow issue */
             padding: 10px;
             margin: 5px 0 15px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            text-align: left;
             display: block;
-            text-align: center;
         }
 
         button {
@@ -83,47 +72,45 @@
         }
 
         .back-home {
-            display: inline-block;
-            margin-top: 20px;
+            display: block;
+            margin: 20px auto;
             padding: 10px 20px;
             background-color: #007bff;
             color: white;
             text-decoration: none;
             border-radius: 5px;
             font-size: 16px;
+            width: 200px;
+            text-align: center;
         }
 
         .back-home:hover {
             background-color: #0056b3;
         }
-
-        #verificationStatus {
-            margin-top: 15px;
-            font-size: 16px;
-            color: #666;
-        }
     </style>
 </head>
 <body>
-    <h1>Battle Registration</h1>
-    <p>Register to join the FlintFrames NFT Battle.</p>
+    <div class="header">
+        <h1>Battle Registration</h1>
+        <p>Register to join the FlintFrames NFT Battle.</p>
+    </div>
 
-    <form id="battleForm">
-        <label for="username">Username:</label>
-        <input type="text" id="username" required>
+    <div class="container">
+        <form id="battleForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" required>
 
-        <label for="email">Email Address:</label>
-        <input type="email" id="email" required>
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" required>
 
-        <label for="wallet">Wallet Address:</label>
-        <input type="text" id="wallet" required>
+            <label for="wallet">Wallet Address:</label>
+            <input type="text" id="wallet" required>
 
-        <button type="button" onclick="verifyNFTs()">Register & Verify NFTs</button>
-    </form>
+            <button type="button" onclick="verifyNFTs()">Register & Verify NFTs</button>
+        </form>
 
-    <p id="verificationStatus"></p>
-
-    <a href="index.html" class="back-home">Back to Home</a>
+        <a href="index.html" class="back-home">Back to Home</a>
+    </div>
 
     <script>
         async function verifyNFTs() {
@@ -131,13 +118,12 @@
             let statusElement = document.getElementById("verificationStatus");
 
             if (!wallet) {
-                statusElement.innerHTML = "Please enter a valid wallet address.";
+                alert("Please enter a valid wallet address.");
                 return;
             }
 
-            statusElement.innerHTML = "Verifying NFTs... Please wait.";
+            alert("Verifying NFTs... Please wait.");
 
-            // OpenSea API for checking NFTs
             let url = `https://api.opensea.io/api/v1/assets?owner=${wallet}&order_direction=desc&limit=5`;
 
             try {
@@ -145,12 +131,12 @@
                 let data = await response.json();
 
                 if (data.assets.length > 0) {
-                    statusElement.innerHTML = "✅ NFTs verified! You are registered for the battle.";
+                    alert("✅ NFTs verified! You are registered for the battle.");
                 } else {
-                    statusElement.innerHTML = "❌ No FlintFrames NFTs found in your wallet.";
+                    alert("❌ No FlintFrames NFTs found in your wallet.");
                 }
             } catch (error) {
-                statusElement.innerHTML = "⚠️ Error fetching NFTs. Please try again.";
+                alert("⚠️ Error fetching NFTs. Please try again.");
             }
         }
     </script>
