@@ -79,7 +79,6 @@ body {
 
 .image-link img {
     width: 100%;
-    border: 5px solid #E8E9EB;
     transition: transform 0.3s ease;
 }
 
