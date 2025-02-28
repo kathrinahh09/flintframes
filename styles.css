@@ -116,10 +116,11 @@ body {
 
 .announcement-content {
     background-image: url('IMAGE/ANNOUNCEMENTBACKGROUND.jfif');
+    background-color: #808080;
     background-size: cover;
     background-position: center;
     padding: 20px;
-    color: #808080;
+    text-color: white;
     border-radius: 30px;
     margin-top: 25px;
 }
