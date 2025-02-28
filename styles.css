@@ -106,26 +106,25 @@ body {
     overflow: hidden;
 }
 
-.announcement-image {
-    background-image: url('IMAGE/FLINTFRAMES REVISED GENERAL ANNOUNCEMENT TITLE.png');
-    background-size: contain;
-    background-position: left;
-    background-repeat: no-repeat;
-    height: 50px;
-}
-
 .announcement-section {
-    text-align: left;
+    text-align: center;
     margin: 20px;
     padding: 20px;
     background-color: #4e4d4d;
     border-radius: 10px;
 }
 
+.announcement-title {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 10px;
+}
+
 .announcement-content {
     color: white;
     font-size: 16px;
     line-height: 1.5;
+    text-align: left;
 }
 
 
