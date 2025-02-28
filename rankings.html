@@ -45,15 +45,19 @@
             border-radius: 10px;
         }
 
-        a {
+        .back-home {
             display: inline-block;
             margin-top: 20px;
-            color: #007bff;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
             text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease-in-out;
         }
 
-        a:hover {
-            text-decoration: underline;
+        .back-home:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -68,7 +72,7 @@
 
         <p>Stay tuned for more exciting updates coming your way!</p>
 
-        <a href="index.html">Back to Home</a>
+        <a href="index.html" class="back-home">Back to Home</a>
     </div>
 </body>
 </html>
