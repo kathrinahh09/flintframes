@@ -4,90 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Battle Registration</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-
-        .header {
-            text-align: center;
-            padding: 40px 10px 10px;
-            background-image: url('IMAGE/backgroundimage.jfif');
-            background-size: cover;
-            background-position: center;
-            color: white; /* Text now visible */
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-        }
-
-        .container {
-            text-align: center;
-            padding: 20px;
-        }
-
-        form {
-            background: white;
-            padding: 20px;
-            max-width: 350px;
-            margin: 20px auto;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            text-align: left;
-        }
-
-        label {
-            font-weight: bold;
-            color: #444;
-            display: block;
-            margin: 10px 0 5px;
-        }
-
-        input {
-            width: 100%; /* Fix overflow issue */
-            padding: 10px;
-            margin: 5px 0 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            text-align: left;
-            display: block;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 10px;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        .back-home {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 16px;
-            width: 200px;
-            text-align: center;
-        }
-
-        .back-home:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link rel="stylesheet" href="battle-registration.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <div class="header">
@@ -106,39 +24,14 @@
             <label for="wallet">Wallet Address:</label>
             <input type="text" id="wallet" required>
 
-            <button type="button" onclick="verifyNFTs()">Register & Verify NFTs</button>
+            <button type="submit">Register & Verify NFTs</button>
         </form>
+
+        <p id="statusMessage"></p>
 
         <a href="index.html" class="back-home">Back to Home</a>
     </div>
 
-    <script>
-        async function verifyNFTs() {
-            let wallet = document.getElementById("wallet").value;
-            let statusElement = document.getElementById("verificationStatus");
-
-            if (!wallet) {
-                alert("Please enter a valid wallet address.");
-                return;
-            }
-
-            alert("Verifying NFTs... Please wait.");
-
-            let url = `https://api.opensea.io/api/v1/assets?owner=${wallet}&order_direction=desc&limit=5`;
-
-            try {
-                let response = await fetch(url);
-                let data = await response.json();
-
-                if (data.assets.length > 0) {
-                    alert("✅ NFTs verified! You are registered for the battle.");
-                } else {
-                    alert("❌ No FlintFrames NFTs found in your wallet.");
-                }
-            } catch (error) {
-                alert("⚠️ Error fetching NFTs. Please try again.");
-            }
-        }
-    </script>
+    <script src="battle-registration.js"></script>
 </body>
 </html>
