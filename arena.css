@@ -1,0 +1,22 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #121212;
+    color: #fff;
+}
+
+.tournament-bracket {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.match {
+    margin: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    background: linear-gradient(45deg, #ff9800, #ff5722);
+    color: white;
+    font-weight: bold;
+}
