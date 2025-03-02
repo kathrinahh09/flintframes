@@ -8,6 +8,7 @@ document.getElementById("battleForm").addEventListener("submit", async function 
     const username = document.getElementById("username").value;
     const email = document.getElementById("email").value;
     const wallet = document.getElementById("wallet").value;
+    const password = document.getElementById("password").value; // NEW FIELD
     const statusMessage = document.getElementById("statusMessage");
 
     statusMessage.textContent = "Verifying NFTs... Please wait.";
@@ -34,9 +35,11 @@ document.getElementById("battleForm").addEventListener("submit", async function 
         return;
     }
 
-    // **Step 3: Store in Supabase**
+    // **Step 3: Store in Supabase (with password)**
+    const hashedPassword = btoa(password); // Base64 encoding for basic security
+
     let { error } = await supabase.from("players").insert([
-        { username, email, wallet, verified: false }
+        { username, email, wallet, password: hashedPassword, verified: false }
     ]);
 
     if (error) {
