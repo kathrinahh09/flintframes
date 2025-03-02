@@ -13,7 +13,7 @@ document.getElementById("battleForm").addEventListener("submit", async function 
     statusMessage.textContent = "Verifying NFTs... Please wait.";
     statusMessage.style.color = "blue";
 
-    // **Step 1: Check if player already registered**
+    // **Step 1: Check if player is already registered**
     let { data: existingPlayer } = await supabase
         .from("players")
         .select("wallet")
@@ -43,6 +43,9 @@ document.getElementById("battleForm").addEventListener("submit", async function 
         statusMessage.textContent = "⚠️ Registration failed. Please try again.";
         statusMessage.style.color = "red";
     } else {
+        // ✅ Store wallet in localStorage after successful registration
+        localStorage.setItem("wallet", wallet);
+
         statusMessage.textContent = "✅ Registration successful! Await verification.";
         statusMessage.style.color = "green";
     }
