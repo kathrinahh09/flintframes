@@ -1,6 +1,4 @@
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_ANON_KEY;
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+import { supabase } from "./config.js";
 
 // ✅ Function to check if user is logged in
 async function checkAuth() {
