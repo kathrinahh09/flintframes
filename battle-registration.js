@@ -1,5 +1,5 @@
-const supabaseUrl = "https://YOUR_SUPABASE_URL";
-const supabaseKey = "YOUR_SUPABASE_ANON_KEY";
+const supabaseUrl = https://pukmiyeyaiphhpzlhefe.supabase.co;
+const supabaseKey = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB1a21peWV5YWlwaGhwemxoZWZlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA4MzkxMjMsImV4cCI6MjA1NjQxNTEyM30.gmoeJsHsp2qyDgsTuNhQRTBT5yrNgnKlseIQQg3yLvY;
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 document.getElementById("battleForm").addEventListener("submit", async function (event) {
@@ -8,13 +8,22 @@ document.getElementById("battleForm").addEventListener("submit", async function 
     const username = document.getElementById("username").value;
     const email = document.getElementById("email").value;
     const wallet = document.getElementById("wallet").value;
-    const password = document.getElementById("password").value; // NEW FIELD
+    const nftLink = document.getElementById("nftLink").value;
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
     const statusMessage = document.getElementById("statusMessage");
 
-    statusMessage.textContent = "Verifying NFTs... Please wait.";
+    statusMessage.textContent = "Submitting registration... Please wait.";
     statusMessage.style.color = "blue";
 
-    // **Step 1: Check if player is already registered**
+    // **Password Confirmation Check**
+    if (password !== confirmPassword) {
+        statusMessage.textContent = "❌ Passwords do not match!";
+        statusMessage.style.color = "red";
+        return;
+    }
+
+    // **Check if wallet is already registered**
     let { data: existingPlayer } = await supabase
         .from("players")
         .select("wallet")
@@ -27,19 +36,16 @@ document.getElementById("battleForm").addEventListener("submit", async function 
         return;
     }
 
-    // **Step 2: Verify NFTs on OpenSea**
-    let isNFTValid = await verifyFlintFramesNFT(wallet);
-    if (!isNFTValid) {
-        statusMessage.textContent = "❌ No FlintFrames NFTs found in your wallet.";
-        statusMessage.style.color = "red";
-        return;
-    }
-
-    // **Step 3: Store in Supabase (with password)**
-    const hashedPassword = btoa(password); // Base64 encoding for basic security
-
+    // **Securely store the user’s details**
     let { error } = await supabase.from("players").insert([
-        { username, email, wallet, password: hashedPassword, verified: false }
+        {
+            username,
+            email,
+            wallet,
+            nft_link: nftLink,
+            password,  // 🔒 Ensure this is hashed in Supabase
+            verified: false
+        }
     ]);
 
     if (error) {
@@ -49,26 +55,7 @@ document.getElementById("battleForm").addEventListener("submit", async function 
         // ✅ Store wallet in localStorage after successful registration
         localStorage.setItem("wallet", wallet);
 
-        statusMessage.textContent = "✅ Registration successful! Await verification.";
+        statusMessage.textContent = "✅ Registration submitted! Await manual verification.";
         statusMessage.style.color = "green";
     }
 });
-
-// **Function: Verify FlintFrames NFT**
-async function verifyFlintFramesNFT(wallet) {
-    let url = `https://api.opensea.io/api/v1/assets?owner=${wallet}&order_direction=desc&limit=10`;
-
-    try {
-        let response = await fetch(url);
-        let data = await response.json();
-
-        let flintframesNFTs = data.assets.filter(asset => 
-            asset.collection.slug === "flintframes"  // Ensure it's your NFT collection
-        );
-
-        return flintframesNFTs.length > 0;
-    } catch (error) {
-        console.error("Error fetching NFTs:", error);
-        return false;
-    }
-}
