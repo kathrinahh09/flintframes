@@ -1,8 +1,6 @@
-require('dotenv').config();  // Load environment variables
-
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_ANON_KEY;
-const supabase = require('@supabase/supabase-js').createClient(supabaseUrl, supabaseKey);
+const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 // ✅ Function to check if user is logged in
 async function checkAuth() {
