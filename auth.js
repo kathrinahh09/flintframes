@@ -2,16 +2,16 @@ import { supabase } from "./config.js";
 
 // ✅ Function to check if user is logged in
 async function checkAuth() {
-    const wallet = localStorage.getItem("wallet");
+    const wallet = sessionStorage.getItem("wallet");  // ✅ Use sessionStorage instead of localStorage
     if (!wallet) {
         alert("⚠️ Please log in first!");
-        window.location.href = "Battle Registration.html";  // Redirect to login if not authenticated
+        window.location.href = "Battle Registration.html";
     }
 }
 
 // ✅ Function to check if player is verified for Arena access
 async function checkPlayerAccess() {
-    const wallet = localStorage.getItem("wallet");
+    const wallet = sessionStorage.getItem("wallet");
 
     if (!wallet) {
         alert("⚠️ Please register first!");
@@ -29,11 +29,9 @@ async function checkPlayerAccess() {
         alert("⚠️ Verification pending. You cannot enter the Arena yet.");
         window.location.href = "Battle Registration.html";
     } else {
-        // ✅ Player is verified, allow access
         document.getElementById("arena-content").style.display = "block";
     }
 }
 
-// ✅ Call functions when the page loads
-checkAuth();         // Ensure user is logged in
-checkPlayerAccess(); // Ensure user is verified before entering Arena
+checkAuth();
+checkPlayerAccess();
