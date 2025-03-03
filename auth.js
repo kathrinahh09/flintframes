@@ -1,6 +1,8 @@
-const supabaseUrl = https://pukmiyeyaiphhpzlhefe.supabase.co;
-const supabaseKey = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB1a21peWV5YWlwaGhwemxoZWZlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA4MzkxMjMsImV4cCI6MjA1NjQxNTEyM30.gmoeJsHsp2qyDgsTuNhQRTBT5yrNgnKlseIQQg3yLvY;
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+require('dotenv').config();  // Load environment variables
+
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_ANON_KEY;
+const supabase = require('@supabase/supabase-js').createClient(supabaseUrl, supabaseKey);
 
 // ✅ Function to check if user is logged in
 async function checkAuth() {
