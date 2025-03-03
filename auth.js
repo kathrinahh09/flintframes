@@ -2,43 +2,40 @@ const supabaseUrl = https://pukmiyeyaiphhpzlhefe.supabase.co;
 const supabaseKey = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB1a21peWV5YWlwaGhwemxoZWZlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA4MzkxMjMsImV4cCI6MjA1NjQxNTEyM30.gmoeJsHsp2qyDgsTuNhQRTBT5yrNgnKlseIQQg3yLvY;
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-async function checkVerification() {
-    let wallet = localStorage.getItem("wallet"); // Retrieve stored wallet
-    const arenaLink = document.getElementById("arena-link");
+// ✅ Function to check if user is logged in
+async function checkAuth() {
+    const wallet = localStorage.getItem("wallet");
+    if (!wallet) {
+        alert("⚠️ Please log in first!");
+        window.location.href = "Battle Registration.html";  // Redirect to login if not authenticated
+    }
+}
+
+// ✅ Function to check if player is verified for Arena access
+async function checkPlayerAccess() {
+    const wallet = localStorage.getItem("wallet");
 
     if (!wallet) {
-        arenaLink.addEventListener("click", function (event) {
-            event.preventDefault();
-            alert("Only verified players can enter the Arena!");
-        });
+        alert("⚠️ Please register first!");
+        window.location.href = "Battle Registration.html";
         return;
     }
 
-    let { data: player } = await supabase
+    let { data: player, error } = await supabase
         .from("players")
         .select("verified")
         .eq("wallet", wallet)
         .single();
 
-    if (!player) {
-        // Unregistered player
-        arenaLink.addEventListener("click", function (event) {
-            event.preventDefault();
-            alert("You are not registered. Please register first!");
-        });
-    } else if (!player.verified) {
-        // Registered but not verified
-        arenaLink.addEventListener("click", function (event) {
-            event.preventDefault();
-            alert("Your registration is pending verification. Please wait for approval.");
-        });
+    if (error || !player || !player.verified) {
+        alert("⚠️ Verification pending. You cannot enter the Arena yet.");
+        window.location.href = "Battle Registration.html";
     } else {
-        // Verified player - Allow access
-        arenaLink.addEventListener("click", function () {
-            window.location.href = "arena.html";
-        });
+        // ✅ Player is verified, allow access
+        document.getElementById("arena-content").style.display = "block";
     }
 }
 
-// Run the verification check when the page loads
-checkVerification();
+// ✅ Call functions when the page loads
+checkAuth();         // Ensure user is logged in
+checkPlayerAccess(); // Ensure user is verified before entering Arena
