@@ -13,46 +13,43 @@ document.getElementById("battleForm").addEventListener("submit", async function 
 
     statusMessage.textContent = "Submitting registration... Please wait.";
     statusMessage.style.color = "blue";
-
-    // **Password Confirmation Check**
+    
     if (password !== confirmPassword) {
         statusMessage.textContent = "❌ Passwords do not match!";
         statusMessage.style.color = "red";
         return;
     }
 
-    // **Check if wallet is already registered**
-    let { data: existingPlayer } = await supabase
+    let { data: existingPlayer, error: checkError } = await supabase
         .from("players")
         .select("wallet")
         .eq("wallet", wallet)
         .single();
 
+    if (checkError) console.error("Check wallet error:", checkError);
     if (existingPlayer) {
         statusMessage.textContent = "❌ This wallet is already registered.";
         statusMessage.style.color = "red";
         return;
     }
 
-    // **Securely store the user’s details**
-    let { error } = await supabase.from("players").insert([
+    let { error: insertError } = await supabase.from("players").insert([
         {
             username,
             email,
             wallet,
             nft_link: nftLink,
-            password,  // 🔒 Ensure this is hashed in Supabase
+            password,
             verified: false
         }
     ]);
 
-    if (error) {
+    if (insertError) {
+        console.error("Insert error:", insertError);
         statusMessage.textContent = "⚠️ Registration failed. Please try again.";
         statusMessage.style.color = "red";
     } else {
-        // ✅ Store wallet in localStorage after successful registration
         localStorage.setItem("wallet", wallet);
-
         statusMessage.textContent = "✅ Registration submitted! Await manual verification.";
         statusMessage.style.color = "green";
     }
