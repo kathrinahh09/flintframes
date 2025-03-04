@@ -20,3 +20,29 @@ body {
     color: white;
     font-weight: bold;
 }
+
+.card-selection {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.card {
+    width: 100px;
+    height: 150px;
+    margin: 5px;
+    padding: 10px;
+    border: 2px solid white;
+    background-color: #222;
+    cursor: pointer;
+}
+
+.card.selected {
+    border-color: gold;
+}
+
+.countdown {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}
