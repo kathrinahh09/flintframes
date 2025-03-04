@@ -44,6 +44,9 @@ document.getElementById("battleForm").addEventListener("submit", async function 
     // Hash password before storing
     const hashedPassword = await hashPassword(password);
 
+    // ** DEBUG: Log data before inserting **
+    console.log("Attempting to insert:", { username, email, wallet, nft_link: nftLink, password: hashedPassword });
+
     // Insert user into Supabase
     const { error: insertError } = await supabase.from("players").insert([
         {
@@ -51,13 +54,14 @@ document.getElementById("battleForm").addEventListener("submit", async function 
             email,
             wallet,
             nft_link: nftLink,
-            password: hashedPassword,  // Store hashed password
+            password: hashedPassword, // Store hashed password
             verified: false
         }
     ]);
 
     if (insertError) {
         console.error("Insert error:", insertError);
+        console.error("Error details:", insertError.details);
         statusMessage.textContent = "⚠️ Registration failed. Please try again.";
         statusMessage.style.color = "red";
     } else {
@@ -66,7 +70,7 @@ document.getElementById("battleForm").addEventListener("submit", async function 
         statusMessage.textContent = "✅ Registration submitted! Await manual verification.";
         statusMessage.style.color = "green";
 
-        // Redirect to login page
+        // Redirect to login page after 2 seconds
         setTimeout(() => {
             window.location.href = "arena.html";
         }, 2000);
