@@ -1,7 +1,21 @@
+async function getCurrentUser() {
+    let { data: user, error } = await supabase
+        .from("players")
+        .select("id, username, verified")
+        .eq("id", getUserId()) // Replace with your authentication method
+        .single();
+
+    if (error) {
+        console.error("Error fetching user:", error);
+        return null;
+    }
+    return user;
+}
+
 async function fetchPlayers() {
     let { data: players, error } = await supabase
         .from('players')
-        .select('id, username, nfts')
+        .select('id, username, nfts, verified')
         .order('id', { ascending: true });
 
     if (error) return console.error("Error fetching players:", error);
@@ -9,6 +23,13 @@ async function fetchPlayers() {
 }
 
 async function generateBracket() {
+    let user = await getCurrentUser();
+    if (!user || !user.verified) {
+        alert("You are not verified! Please register and get verified first.");
+        window.location.href = "Battle Registration.html";
+        return;
+    }
+
     let players = await fetchPlayers();
     let bracket = document.getElementById("bracket");
 
@@ -43,38 +64,6 @@ async function generateBracket() {
     }
 
     return matchups;
-}
-
-async function selectBattleCards(match) {
-    if (match.player2.username === "Bye") {
-        match.selectedCards.player1 = match.player1.nfts.slice(0, 3);
-        return;
-    }
-
-    return new Promise((resolve) => {
-        let countdown = 15;
-        let countdownElement = document.createElement("div");
-        countdownElement.classList.add("countdown");
-        document.body.appendChild(countdownElement);
-
-        let interval = setInterval(() => {
-            countdownElement.innerText = `Time remaining: ${countdown} seconds`;
-            countdown--;
-            if (countdown < 0) {
-                clearInterval(interval);
-                document.body.removeChild(countdownElement);
-                console.log("Time's up! Auto-selecting cards...");
-                match.selectedCards.player1 = getRandomCards(match.player1.nfts);
-                match.selectedCards.player2 = getRandomCards(match.player2.nfts);
-                resolve();
-            }
-        }, 1000);
-    });
-}
-
-function getRandomCards(nfts) {
-    let shuffled = nfts.sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, 3);
 }
 
 function determineWinner(match) {
