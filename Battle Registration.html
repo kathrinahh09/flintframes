@@ -30,13 +30,17 @@
             <label for="password">Password:</label>
             <div class="password-container">
                 <input type="password" id="password" name="password" autocomplete="new-password" required>
-                <span class="toggle-password" onclick="togglePassword('password')">👁️</span>
+                <span class="toggle-password" onclick="togglePassword('password', this)">
+                    <img src="eye-slash-icon.png" alt="Toggle Password" id="passwordIcon">
+                </span>
             </div>
 
             <label for="confirmPassword">Confirm Password:</label>
             <div class="password-container">
                 <input type="password" id="confirmPassword" name="confirmPassword" autocomplete="new-password" required>
-                <span class="toggle-password" onclick="togglePassword('confirmPassword')">👁️</span>
+                <span class="toggle-password" onclick="togglePassword('confirmPassword', this)">
+                    <img src="eye-slash-icon.png" alt="Toggle Password" id="confirmPasswordIcon">
+                </span>
             </div>
 
             <button type="submit">Register & Submit for Verification</button>
@@ -53,9 +57,16 @@
 
     <script type="module" src="battle-registration.js"></script>
     <script>
-        function togglePassword(fieldId) {
-            const field = document.getElementById(fieldId);
-            field.type = field.type === "password" ? "text" : "password";
+        function togglePassword(inputId, iconElement) {
+            const input = document.getElementById(inputId);
+            const icon = iconElement.querySelector("img");
+            if (input.type === "password") {
+                input.type = "text";
+                icon.src = "eye-icon.png"; // Change to visible eye icon
+            } else {
+                input.type = "password";
+                icon.src = "eye-slash-icon.png"; // Change back to slashed eye icon
+            }
         }
     </script>
 </body>
