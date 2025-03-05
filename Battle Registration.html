@@ -30,17 +30,13 @@
             <label for="password">Password:</label>
             <div class="password-container">
                 <input type="password" id="password" name="password" autocomplete="new-password" required>
-                <span class="toggle-password" onclick="togglePassword('password', this)">
-                    <img src="eye-slash-icon.png" alt="Toggle Password" id="passwordIcon">
-                </span>
+                <span class="eye-icon" onmousedown="togglePassword('password', true)" onmouseup="togglePassword('password', false)" onmouseleave="togglePassword('password', false)">&#128065;</span>
             </div>
 
             <label for="confirmPassword">Confirm Password:</label>
             <div class="password-container">
                 <input type="password" id="confirmPassword" name="confirmPassword" autocomplete="new-password" required>
-                <span class="toggle-password" onclick="togglePassword('confirmPassword', this)">
-                    <img src="eye-slash-icon.png" alt="Toggle Password" id="confirmPasswordIcon">
-                </span>
+                <span class="eye-icon" onmousedown="togglePassword('confirmPassword', true)" onmouseup="togglePassword('confirmPassword', false)" onmouseleave="togglePassword('confirmPassword', false)">&#128065;</span>
             </div>
 
             <button type="submit">Register & Submit for Verification</button>
@@ -55,19 +51,12 @@
         <a href="index.html" class="back-home">Back to Home</a>
     </div>
 
-    <script type="module" src="battle-registration.js"></script>
     <script>
-        function togglePassword(inputId, iconElement) {
-            const input = document.getElementById(inputId);
-            const icon = iconElement.querySelector("img");
-            if (input.type === "password") {
-                input.type = "text";
-                icon.src = "eye-icon.png"; // Change to visible eye icon
-            } else {
-                input.type = "password";
-                icon.src = "eye-slash-icon.png"; // Change back to slashed eye icon
-            }
+        function togglePassword(fieldId, show) {
+            const field = document.getElementById(fieldId);
+            field.type = show ? "text" : "password";
         }
     </script>
+    <script type="module" src="battle-registration.js"></script>
 </body>
 </html>
