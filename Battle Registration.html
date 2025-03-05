@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Battle Registration</title>
     <link rel="stylesheet" href="battle-registration.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <div class="header">
         <h1>Battle Registration</h1>
-        <p>Register to join the FlintFrames NFT Battle.</p>
+        <p>Register to join the FlintFrames NFT Battle Cards.</p>
     </div>
 
     <div class="container">
@@ -27,10 +28,16 @@
             <input type="url" id="nftLink" name="nftLink" autocomplete="off" placeholder="https://opensea.io/assets/matic/..." required>
 
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" autocomplete="new-password" required>
+            <div class="password-container">
+                <input type="password" id="password" name="password" autocomplete="new-password" required>
+                <span class="toggle-password" onclick="togglePassword('password')">👁️</span>
+            </div>
 
             <label for="confirmPassword">Confirm Password:</label>
-            <input type="password" id="confirmPassword" name="confirmPassword" autocomplete="new-password" required>
+            <div class="password-container">
+                <input type="password" id="confirmPassword" name="confirmPassword" autocomplete="new-password" required>
+                <span class="toggle-password" onclick="togglePassword('confirmPassword')">👁️</span>
+            </div>
 
             <button type="submit">Register & Submit for Verification</button>
         </form>
@@ -38,12 +45,18 @@
         <p id="statusMessage"></p>
 
         <div class="notification">
-            <p>⚠️ <strong>Note:</strong> Verification is manual and may take some time. You will receive an update once your access to the Arena is approved.</p>
+            <p>⚠️ <strong>Note:</strong> Verification is now automatic! If you own a FlintFrames NFT, you will be granted access immediately.</p>
         </div>
 
         <a href="index.html" class="back-home">Back to Home</a>
     </div>
 
     <script type="module" src="battle-registration.js"></script>
+    <script>
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            field.type = field.type === "password" ? "text" : "password";
+        }
+    </script>
 </body>
 </html>
