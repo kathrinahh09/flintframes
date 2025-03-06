@@ -1,4 +1,9 @@
-import { supabase } from "./config.js"; 
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+const supabase = createClient(
+    import.meta.env.VITE_SUPABASE_URL, 
+    import.meta.env.VITE_SUPABASE_ANON_KEY
+);
 
 document.getElementById("battleForm").addEventListener("submit", async function (event) {
     event.preventDefault();
@@ -17,6 +22,28 @@ document.getElementById("battleForm").addEventListener("submit", async function 
     // Password validation
     if (password !== confirmPassword) {
         statusMessage.textContent = "❌ Passwords do not match!";
+        statusMessage.style.color = "red";
+        return;
+    }
+
+    // Verify NFT ownership
+    try {
+        const response = await fetch("https://your-render-server-url.com/verify-nft", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ walletAddress: wallet })
+        });
+
+        const data = await response.json();
+
+        if (!data.verified) {
+            statusMessage.textContent = "❌ NFT verification failed. You must own a FlintFrames NFT to register.";
+            statusMessage.style.color = "red";
+            return;
+        }
+    } catch (error) {
+        console.error("Error verifying NFT:", error);
+        statusMessage.textContent = "⚠️ Error verifying NFT. Please try again later.";
         statusMessage.style.color = "red";
         return;
     }
@@ -44,9 +71,6 @@ document.getElementById("battleForm").addEventListener("submit", async function 
     // Hash password before storing
     const hashedPassword = await hashPassword(password);
 
-    // ** DEBUG: Log data before inserting **
-    console.log("Attempting to insert:", { username, email, wallet, nft_link: nftLink, password: hashedPassword });
-
     // Insert user into Supabase
     const { error: insertError } = await supabase.from("players").insert([
         {
@@ -55,22 +79,20 @@ document.getElementById("battleForm").addEventListener("submit", async function 
             wallet,
             nft_link: nftLink,
             password: hashedPassword, // Store hashed password
-            verified: false
+            verified: true // Automatically verified after NFT check
         }
     ]);
 
     if (insertError) {
         console.error("Insert error:", insertError);
-        console.error("Error details:", insertError.details);
         statusMessage.textContent = "⚠️ Registration failed. Please try again.";
         statusMessage.style.color = "red";
     } else {
         localStorage.setItem("wallet", wallet);
         localStorage.setItem("email", email);
-        statusMessage.textContent = "✅ Registration submitted! Await manual verification.";
+        statusMessage.textContent = "✅ Registration successful! Redirecting to Arena...";
         statusMessage.style.color = "green";
 
-        // Redirect to login page after 2 seconds
         setTimeout(() => {
             window.location.href = "arena.html";
         }, 2000);
