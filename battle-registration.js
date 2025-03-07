@@ -80,7 +80,7 @@ try {
         nft_link: nftLink,
         password: hashedPassword,
         verified: true,
-        created_at: new Date().toISOString() // Ensures timestamp is included
+        created_at: new Date().toISOString()
     }
 ]);
 
