@@ -72,16 +72,17 @@ try {
     const hashedPassword = await hashPassword(password);
 
     // Insert user into Supabase
-    const { error: insertError } = await supabase.from("players").insert([
-        {
-            username,
-            email,
-            wallet,
-            nft_link: nftLink,
-            password: hashedPassword, // Store hashed password
-            verified: true // Automatically verified after NFT check
-        }
-    ]);
+    const { error } = await supabase.from("players").insert([
+    {
+        username,
+        email,
+        wallet,
+        nft_link: nftLink,
+        password: hashedPassword,
+        verified: true,
+        created_at: new Date().toISOString() // Ensures timestamp is included
+    }
+]);
 
     if (insertError) {
         console.error("Insert error:", insertError);
