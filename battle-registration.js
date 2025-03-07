@@ -27,26 +27,26 @@ document.getElementById("battleForm").addEventListener("submit", async function 
     }
 
     // Verify NFT ownership
-try {
-    const response = await fetch("https://nft-verification-api.onrender.com/verify-nft", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ walletAddress: wallet })  // Use the player's wallet address
-    });
+    try {
+        const response = await fetch("https://nft-verification-api.onrender.com/verify-nft", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ walletAddress: wallet })  // Use the player's wallet address
+        });
 
-    const data = await response.json();
+        const data = await response.json();
 
-    if (!data.verified) {
-        statusMessage.textContent = "❌ NFT verification failed. You must own a FlintFrames NFT to register.";
+        if (!data.verified) {
+            statusMessage.textContent = "❌ NFT verification failed. You must own a FlintFrames NFT to register.";
+            statusMessage.style.color = "red";
+            return;
+        }
+    } catch (error) {
+        console.error("Error verifying NFT:", error);
+        statusMessage.textContent = "⚠️ Error verifying NFT. Please try again later.";
         statusMessage.style.color = "red";
         return;
     }
-} catch (error) {
-    console.error("Error verifying NFT:", error);
-    statusMessage.textContent = "⚠️ Error verifying NFT. Please try again later.";
-    statusMessage.style.color = "red";
-    return;
-}
 
     // Check if email or wallet is already registered
     const { data: existingPlayer, error: checkError } = await supabase
@@ -72,17 +72,17 @@ try {
     const hashedPassword = await hashPassword(password);
 
     // Insert user into Supabase
-    const { error } = await supabase.from("players").insert([
-    {
-        username,
-        email,
-        wallet,
-        nft_link: nftLink,
-        password: hashedPassword,
-        verified: true,
-        created_at: new Date().toISOString()
-    }
-]);
+    const { error: insertError } = await supabase.from("players").insert([
+        {
+            username,
+            email,
+            wallet,
+            nft_link: nftLink,
+            password: hashedPassword,
+            verified: true,
+            created_at: new Date().toISOString()
+        }
+    ]);
 
     if (insertError) {
         console.error("Insert error:", insertError);
