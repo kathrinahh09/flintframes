@@ -108,3 +108,23 @@ async function hashPassword(password) {
         .map(b => b.toString(16).padStart(2, "0"))
         .join("");
 }
+
+// Password visibility toggle
+const togglePasswordVisibility = (inputId, iconId) => {
+    const passwordField = document.getElementById(inputId);
+    const eyeIcon = document.getElementById(iconId);
+
+    eyeIcon.addEventListener("mousedown", () => {
+        passwordField.type = "text";
+    });
+    eyeIcon.addEventListener("mouseup", () => {
+        passwordField.type = "password";
+    });
+    eyeIcon.addEventListener("mouseleave", () => {
+        passwordField.type = "password";
+    });
+};
+
+// Apply to both password fields
+togglePasswordVisibility("password", "togglePassword");
+togglePasswordVisibility("confirmPassword", "toggleConfirmPassword");
