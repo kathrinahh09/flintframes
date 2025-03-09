@@ -126,21 +126,37 @@ async function hashPassword(password) {
 
 // Password visibility toggle (FIXED)
 document.addEventListener("DOMContentLoaded", function () {
-    function togglePasswordVisibility(inputId, iconId) {
+    function enablePasswordPeek(inputId, iconId) {
         const passwordField = document.getElementById(inputId);
         const eyeIcon = document.getElementById(iconId);
 
-        eyeIcon.addEventListener("click", function () {
-            if (passwordField.type === "password") {
-                passwordField.type = "text";
-                eyeIcon.textContent = "🙈"; // Change icon
-            } else {
-                passwordField.type = "password";
-                eyeIcon.textContent = "👁️"; // Change back
-            }
+        // Show password when pressing the icon
+        eyeIcon.addEventListener("mousedown", function () {
+            passwordField.type = "text";
+        });
+
+        // Hide password when releasing the icon
+        eyeIcon.addEventListener("mouseup", function () {
+            passwordField.type = "password";
+        });
+
+        // Hide password if mouse leaves the icon (prevents getting stuck)
+        eyeIcon.addEventListener("mouseleave", function () {
+            passwordField.type = "password";
+        });
+
+        // Mobile support: Show password when tapping
+        eyeIcon.addEventListener("touchstart", function (event) {
+            event.preventDefault();
+            passwordField.type = "text";
+        });
+
+        // Mobile support: Hide password when lifting finger
+        eyeIcon.addEventListener("touchend", function () {
+            passwordField.type = "password";
         });
     }
 
-    togglePasswordVisibility("password", "togglePassword");
-    togglePasswordVisibility("confirmPassword", "toggleConfirmPassword");
+    enablePasswordPeek("password", "togglePassword");
+    enablePasswordPeek("confirmPassword", "toggleConfirmPassword");
 });
