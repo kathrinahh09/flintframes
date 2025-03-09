@@ -60,6 +60,7 @@ input {
     cursor: pointer;
     font-size: 18px;
     user-select: none;
+    transition: 0.3s ease-in-out;
 }
 
 button {
