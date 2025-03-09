@@ -46,19 +46,17 @@ input {
 
 /* Password field container */
 .password-container {
-    position: relative;
     display: flex;
     align-items: center;
+    gap: 10px; /* Space between input field and icon */
 }
 
 .password-container input {
     flex: 1;
-    padding-right: 30px; /* Space for the icon */
+    padding-right: 10px;
 }
 
 .eye-icon {
-    position: absolute;
-    right: 10px;
     cursor: pointer;
     font-size: 18px;
     user-select: none;
