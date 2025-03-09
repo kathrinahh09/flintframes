@@ -27,8 +27,8 @@ form {
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     text-align: left;
-    border-left: 5px solid #ccc;
-    border-right: 5px solid #ccc;
+    border-left: 20px solid #f4f4f4;
+    border-right: 20px solid #f4f4f4;
 }
 
 label {
@@ -38,32 +38,32 @@ label {
     margin: 10px 0 5px;
 }
 
+.input-container {
+    position: relative;
+    width: 100%;
+}
+
 input {
     width: 100%;
     padding: 10px;
     margin: 5px 0 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-sizing: border-box;
 }
 
-/* Password field container */
-.password-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.password-container input {
-    flex-grow: 1;
-    padding-right: 40px; /* Space for icon */
-}
-
-.eye-icon {
+/* Show/Hide password link */
+.toggle-password {
     position: absolute;
     right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #007bff;
     cursor: pointer;
-    user-select: none;
+    background: none;
+    border: none;
+    padding: 0;
+    text-decoration: underline;
 }
 
 button {
