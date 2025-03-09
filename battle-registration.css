@@ -48,19 +48,27 @@ input {
 .password-container {
     display: flex;
     align-items: center;
-    gap: 10px; /* Space between input field and icon */
+    position: relative;
+    width: 100%;
 }
 
 .password-container input {
     flex: 1;
-    padding-right: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 .eye-icon {
+    margin-left: 10px;
     cursor: pointer;
-    font-size: 18px;
-    user-select: none;
-    transition: 0.3s ease-in-out;
+    font-size: 20px;
+    color: #555;
+    transition: 0.3s;
+}
+
+.eye-icon:hover {
+    color: black;
 }
 
 button {
