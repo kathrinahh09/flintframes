@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Apply the function to both password fields
+    // Apply to both password fields
     setupPasswordToggle("password", "togglePassword");
     setupPasswordToggle("confirmPassword", "toggleConfirmPassword");
 });
