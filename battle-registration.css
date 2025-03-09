@@ -47,13 +47,15 @@ input {
 /* Password field container */
 .password-container {
     position: relative;
+    display: flex;
+    align-items: center;
     width: 100%;
 }
 
 /* Password input field */
 .password-container input {
     width: 100%;
-    padding-right: 40px; /* Makes space for the eye icon */
+    padding-right: 40px; /* Space for eye icon */
     box-sizing: border-box;
 }
 
@@ -66,7 +68,7 @@ input {
     cursor: pointer;
     font-size: 18px;
     color: #555;
-    user-select: none; /* Prevents accidental text selection */
+    user-select: none;
 }
 
 button {
