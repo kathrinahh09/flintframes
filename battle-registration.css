@@ -45,31 +45,10 @@ input {
 }
 
 /* Password field container */
-.password-container {
-    display: flex;
-    align-items: center;
-    position: relative;
-    width: 100%;
-}
-
-.password-container input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
 .eye-icon {
-    margin-left: 10px;
     cursor: pointer;
-    font-size: 20px;
-    color: #555;
-    transition: 0.3s;
-    user-select: none;
-}
-
-.eye-icon:hover {
-    color: black;
+    margin-left: -30px;
+    position: relative;
 }
 
 button {
