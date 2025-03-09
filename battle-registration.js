@@ -133,10 +133,10 @@ document.addEventListener("DOMContentLoaded", function () {
         eyeIcon.addEventListener("click", function () {
             if (passwordField.type === "password") {
                 passwordField.type = "text";
-                eyeIcon.textContent = "🔒"; // Change icon to locked
+                eyeIcon.textContent = "🙈"; // Change icon
             } else {
                 passwordField.type = "password";
-                eyeIcon.textContent = "👁️"; // Change icon back to eye
+                eyeIcon.textContent = "👁️"; // Change back
             }
         });
     }
