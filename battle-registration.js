@@ -126,21 +126,22 @@ async function hashPassword(password) {
 
 // Password visibility toggle (FIXED)
 document.addEventListener("DOMContentLoaded", function () {
-    const passwordField = document.getElementById("password");
-    const confirmPasswordField = document.getElementById("confirmPassword");
-    const togglePassword = document.getElementById("togglePassword");
-    const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
+    function setupPasswordToggle(passwordFieldId, toggleIconId) {
+        const passwordField = document.getElementById(passwordFieldId);
+        const toggleIcon = document.getElementById(toggleIconId);
 
-    const toggleVisibility = (field, icon) => {
-        if (field.type === "password") {
-            field.type = "text";
-            icon.textContent = "🙈"; // Hide icon
-        } else {
-            field.type = "password";
-            icon.textContent = "👁️"; // Show icon
-        }
-    };
+        toggleIcon.addEventListener("click", () => {
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleIcon.textContent = "🙈";
+            } else {
+                passwordField.type = "password";
+                toggleIcon.textContent = "👁️";
+            }
+        });
+    }
 
-    togglePassword.addEventListener("click", () => toggleVisibility(passwordField, togglePassword));
-    toggleConfirmPassword.addEventListener("click", () => toggleVisibility(confirmPasswordField, toggleConfirmPassword));
+    // Apply the function to both password fields
+    setupPasswordToggle("password", "togglePassword");
+    setupPasswordToggle("confirmPassword", "toggleConfirmPassword");
 });
