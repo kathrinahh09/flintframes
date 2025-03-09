@@ -36,20 +36,13 @@ label {
     margin: 10px 0 5px;
 }
 
-.input-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
-
-.input-container input {
-    width: 100%;
+input {
+    width: calc(100% - 40px); /* Adjusted to match password field width */
     padding: 10px;
-    padding-right: 40px;
+    margin: 5px 0 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 16px;
+    display: block;
 }
 
 /* Password field container */
@@ -61,7 +54,8 @@ label {
 
 .password-container input {
     flex-grow: 1;
-    padding-right: 40px;
+    padding-right: 40px; /* Space for icon */
+    width: 100%;
 }
 
 .eye-icon {
@@ -69,7 +63,6 @@ label {
     right: 10px;
     cursor: pointer;
     user-select: none;
-    font-size: 18px;
 }
 
 button {
