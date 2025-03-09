@@ -130,15 +130,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const passwordField = document.getElementById(inputId);
         const eyeIcon = document.getElementById(iconId);
 
-        if (!passwordField || !eyeIcon) return;
+        if (!passwordField || !eyeIcon) return; // Ensure elements exist
 
         eyeIcon.addEventListener("click", () => {
             if (passwordField.type === "password") {
                 passwordField.type = "text";
-                eyeIcon.textContent = "🙈";
+                eyeIcon.textContent = "🙈"; // Hide icon
             } else {
                 passwordField.type = "password";
-                eyeIcon.textContent = "👁️";
+                eyeIcon.textContent = "👁️"; // Show icon
             }
         });
     };
@@ -147,6 +147,3 @@ document.addEventListener("DOMContentLoaded", () => {
     togglePasswordVisibility("password", "togglePassword");
     togglePasswordVisibility("confirmPassword", "toggleConfirmPassword");
 });
-// Apply to both password fields
-togglePasswordVisibility("password", "togglePassword");
-togglePasswordVisibility("confirmPassword", "toggleConfirmPassword");
