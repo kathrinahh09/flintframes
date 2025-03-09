@@ -134,10 +134,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const toggleVisibility = (field, icon) => {
         if (field.type === "password") {
             field.type = "text";
-            icon.innerHTML = "🙈"; // Hide icon
+            icon.textContent = "🙈"; // Hide icon
         } else {
             field.type = "password";
-            icon.innerHTML = "👁️"; // Show icon
+            icon.textContent = "👁️"; // Show icon
         }
     };
 
