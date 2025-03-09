@@ -27,18 +27,24 @@
             <input type="url" id="nftLink" name="nftLink" autocomplete="off" placeholder="https://opensea.io/assets/matic/..." required>
 
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" autocomplete="new-password" required>
+            <div class="password-container">
+                <input type="password" id="password" name="password" autocomplete="new-password" required>
+                <i id="togglePassword" class="eye-icon">👁️</i>
+            </div>
 
             <label for="confirmPassword">Confirm Password:</label>
-            <input type="password" id="confirmPassword" name="confirmPassword" autocomplete="new-password" required>
+            <div class="password-container">
+                <input type="password" id="confirmPassword" name="confirmPassword" autocomplete="new-password" required>
+                <i id="toggleConfirmPassword" class="eye-icon">👁️</i>
+            </div>
 
-            <button type="submit">Register & Submit for Verification</button>
+            <button type="submit">Register & Verify</button>
         </form>
 
         <p id="statusMessage"></p>
 
         <div class="notification">
-            <p>⚠️ <strong>Note:</strong> Verification is manual and may take some time. You will receive an update once your access to the Arena is approved.</p>
+            <p>✅ <strong>Note:</strong> Verification is now automatic! Your FlintFrames NFT will be checked instantly, and if verified, you'll gain immediate access to the Arena.</p>
         </div>
 
         <a href="index.html" class="back-home">Back to Home</a>
