@@ -45,10 +45,22 @@ input {
 }
 
 /* Password field container */
-.eye-icon {
-    cursor: pointer;
-    margin-left: -30px;
+.password-container {
     position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-container input {
+    flex-grow: 1;
+    padding-right: 40px; /* Space for icon */
+}
+
+.eye-icon {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    user-select: none;
 }
 
 button {
