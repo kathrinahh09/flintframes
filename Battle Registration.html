@@ -33,21 +33,15 @@
 </div>
 
 <label for="password">Password:</label>
-<div class="input-container">
+<div class="password-container">
     <input type="password" id="password" required>
-    <span id="togglePassword" class="eye-icon">👁️</span>
-</div>
-
-<label for="confirmPassword">Confirm Password:</label>
-<div class="input-container">
-    <input type="password" id="confirmPassword" required>
-    <span id="toggleConfirmPassword" class="eye-icon">👁️</span>
+    <span class="toggle-password" onclick="togglePassword('password', this)">Show</span>
 </div>
 
 <label for="confirmPassword">Confirm Password:</label>
 <div class="password-container">
     <input type="password" id="confirmPassword" required>
-    <span id="toggleConfirmPassword" class="eye-icon">👁️</span>
+    <span class="toggle-password" onclick="togglePassword('confirmPassword', this)">Show</span>
 </div>
 
             <button type="submit">Register & Verify</button>
