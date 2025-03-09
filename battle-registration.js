@@ -132,11 +132,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         toggleIcon.addEventListener("click", () => {
             if (passwordField.type === "password") {
-                passwordField.type = "text";
-                toggleIcon.textContent = "🙈";
+                passwordField.type = "text"; // Show password
+                toggleIcon.textContent = "🙈"; // Change icon to indicate visibility
             } else {
-                passwordField.type = "password";
-                toggleIcon.textContent = "👁️";
+                passwordField.type = "password"; // Hide password
+                toggleIcon.textContent = "👁️"; // Change back to hidden state
             }
         });
     }
