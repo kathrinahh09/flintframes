@@ -27,6 +27,8 @@ form {
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     text-align: left;
+    border-left: 10px solid #ccc;
+    border-right: 10px solid #ccc;
 }
 
 label {
@@ -42,7 +44,6 @@ input {
     margin: 5px 0 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-sizing: border-box;
 }
 
 /* Password field container */
