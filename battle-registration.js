@@ -1,5 +1,6 @@
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
+// Initialize Supabase client
 const supabase = createClient(
     import.meta.env.VITE_SUPABASE_URL, 
     import.meta.env.VITE_SUPABASE_ANON_KEY
@@ -19,9 +20,22 @@ document.getElementById("battleForm").addEventListener("submit", async function 
     statusMessage.textContent = "Submitting registration... Please wait.";
     statusMessage.style.color = "blue";
 
+    // Validate input fields
+    if (!username || !email || !wallet || !nftLink || !password || !confirmPassword) {
+        statusMessage.textContent = "❌ All fields are required!";
+        statusMessage.style.color = "red";
+        return;
+    }
+
     // Password validation
     if (password !== confirmPassword) {
         statusMessage.textContent = "❌ Passwords do not match!";
+        statusMessage.style.color = "red";
+        return;
+    }
+
+    if (password.length < 8) {
+        statusMessage.textContent = "❌ Password must be at least 8 characters!";
         statusMessage.style.color = "red";
         return;
     }
@@ -111,33 +125,22 @@ async function hashPassword(password) {
 }
 
 // Password visibility toggle
-const togglePasswordVisibility = (inputId, iconId) => {
-    const passwordField = document.getElementById(inputId);
-    const eyeIcon = document.getElementById(iconId);
+document.addEventListener("DOMContentLoaded", function () {
+    const togglePassword = document.getElementById("togglePassword");
+    const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
+    const passwordInput = document.getElementById("password");
+    const confirmPasswordInput = document.getElementById("confirmPassword");
 
-    eyeIcon.addEventListener("mousedown", (event) => {
-        event.preventDefault(); // Prevents any unintended behaviors
-        passwordField.type = "text";
-    });
+    const toggleVisibility = (input, icon) => {
+        if (input.type === "password") {
+            input.type = "text";
+            icon.textContent = "🙈"; // Hide icon
+        } else {
+            input.type = "password";
+            icon.textContent = "👁️"; // Show icon
+        }
+    };
 
-    eyeIcon.addEventListener("mouseup", () => {
-        passwordField.type = "password";
-    });
-
-    eyeIcon.addEventListener("mouseleave", () => {
-        passwordField.type = "password";
-    });
-
-    eyeIcon.addEventListener("touchstart", (event) => {
-        event.preventDefault(); // For mobile devices
-        passwordField.type = "text";
-    });
-
-    eyeIcon.addEventListener("touchend", () => {
-        passwordField.type = "password";
-    });
-};
-
-// Apply to both password fields
-togglePasswordVisibility("password", "togglePassword");
-togglePasswordVisibility("confirmPassword", "toggleConfirmPassword");
+    togglePassword.addEventListener("click", () => toggleVisibility(passwordInput, togglePassword));
+    toggleConfirmPassword.addEventListener("click", () => toggleVisibility(confirmPasswordInput, toggleConfirmPassword));
+});
