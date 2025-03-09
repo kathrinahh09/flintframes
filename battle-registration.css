@@ -37,12 +37,12 @@ label {
 }
 
 input {
-    width: calc(100% - 40px); /* Adjusted to match password field width */
+    width: 100%;
     padding: 10px;
     margin: 5px 0 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    display: block;
+    box-sizing: border-box;
 }
 
 /* Password field container */
@@ -55,7 +55,6 @@ input {
 .password-container input {
     flex-grow: 1;
     padding-right: 40px; /* Space for icon */
-    width: 100%;
 }
 
 .eye-icon {
