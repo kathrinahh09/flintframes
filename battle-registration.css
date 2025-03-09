@@ -44,27 +44,27 @@ input {
     border-radius: 5px;
 }
 
-/* Password Field Container */
+/* Password field container */
 .password-container {
     position: relative;
-    display: flex;
-    align-items: center;
+    width: 100%;
 }
 
-/* Password Input Field */
+/* Password input */
 .password-container input {
     width: 100%;
-    padding-right: 40px;
+    padding-right: 40px; /* Space for the icon */
 }
 
-/* Eye Icon Button */
-.eye-icon {
+/* Eye icon */
+.password-toggle {
     position: absolute;
     right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
     cursor: pointer;
-    border: none;
-    background: none;
     font-size: 18px;
+    color: #555;
 }
 
 button {
