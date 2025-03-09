@@ -115,13 +115,25 @@ const togglePasswordVisibility = (inputId, iconId) => {
     const passwordField = document.getElementById(inputId);
     const eyeIcon = document.getElementById(iconId);
 
-    eyeIcon.addEventListener("mousedown", () => {
+    eyeIcon.addEventListener("mousedown", (event) => {
+        event.preventDefault(); // Prevents any unintended behaviors
         passwordField.type = "text";
     });
+
     eyeIcon.addEventListener("mouseup", () => {
         passwordField.type = "password";
     });
+
     eyeIcon.addEventListener("mouseleave", () => {
+        passwordField.type = "password";
+    });
+
+    eyeIcon.addEventListener("touchstart", (event) => {
+        event.preventDefault(); // For mobile devices
+        passwordField.type = "text";
+    });
+
+    eyeIcon.addEventListener("touchend", () => {
         passwordField.type = "password";
     });
 };
