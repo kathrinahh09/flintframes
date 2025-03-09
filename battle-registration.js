@@ -125,21 +125,28 @@ async function hashPassword(password) {
 }
 
 // Password visibility toggle (FIXED)
-const togglePasswordVisibility = (inputId, iconId) => {
-    const passwordField = document.getElementById(inputId);
-    const eyeIcon = document.getElementById(iconId);
+document.addEventListener("DOMContentLoaded", () => {
+    const togglePasswordVisibility = (inputId, iconId) => {
+        const passwordField = document.getElementById(inputId);
+        const eyeIcon = document.getElementById(iconId);
 
-    eyeIcon.addEventListener("click", () => {
-        if (passwordField.type === "password") {
-            passwordField.type = "text";
-            eyeIcon.textContent = "🙈"; // Change to "hide" icon
-        } else {
-            passwordField.type = "password";
-            eyeIcon.textContent = "👁️"; // Change back to "show" icon
-        }
-    });
-};
+        if (!passwordField || !eyeIcon) return;
 
+        eyeIcon.addEventListener("click", () => {
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                eyeIcon.textContent = "🙈";
+            } else {
+                passwordField.type = "password";
+                eyeIcon.textContent = "👁️";
+            }
+        });
+    };
+
+    // Apply toggle to both fields
+    togglePasswordVisibility("password", "togglePassword");
+    togglePasswordVisibility("confirmPassword", "toggleConfirmPassword");
+});
 // Apply to both password fields
 togglePasswordVisibility("password", "togglePassword");
 togglePasswordVisibility("confirmPassword", "toggleConfirmPassword");
