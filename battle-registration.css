@@ -52,34 +52,36 @@ input {
 }
 
 /* Show/Hide password link */
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.password-container input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    padding-right: 50px; /* Space for Show/Hide text */
+}
+
 .toggle-password {
     position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 12px;
+    right: 15px;
+    font-size: 14px;
     color: #007bff;
     cursor: pointer;
     background: none;
     border: none;
-    padding: 0;
+    padding: 5px;
+    user-select: none;
+}
+
+.toggle-password:hover {
     text-decoration: underline;
-}
-
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px;
-}
-
-button:hover {
-    background-color: #0056b3;
 }
 
 .back-home {
