@@ -45,7 +45,7 @@ document.getElementById("battleForm").addEventListener("submit", async function 
         const response = await fetch("https://nft-verification-api.onrender.com/verify-nft", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ walletAddress: wallet })  // Use the player's wallet address
+            body: JSON.stringify({ walletAddress: wallet })
         });
 
         const data = await response.json();
@@ -124,23 +124,23 @@ async function hashPassword(password) {
         .join("");
 }
 
-// Password visibility toggle
+// Password visibility toggle (FIXED)
 document.addEventListener("DOMContentLoaded", function () {
+    const passwordField = document.getElementById("password");
+    const confirmPasswordField = document.getElementById("confirmPassword");
     const togglePassword = document.getElementById("togglePassword");
     const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
-    const passwordInput = document.getElementById("password");
-    const confirmPasswordInput = document.getElementById("confirmPassword");
 
-    const toggleVisibility = (input, icon) => {
-        if (input.type === "password") {
-            input.type = "text";
-            icon.textContent = "🙈";
+    const toggleVisibility = (field, icon) => {
+        if (field.type === "password") {
+            field.type = "text";
+            icon.innerHTML = "🙈"; // Hide icon
         } else {
-            input.type = "password";
-            icon.textContent = "👁️";
+            field.type = "password";
+            icon.innerHTML = "👁️"; // Show icon
         }
     };
 
-    togglePassword.addEventListener("click", () => toggleVisibility(passwordInput, togglePassword));
-    toggleConfirmPassword.addEventListener("click", () => toggleVisibility(confirmPasswordInput, toggleConfirmPassword));
+    togglePassword.addEventListener("click", () => toggleVisibility(passwordField, togglePassword));
+    toggleConfirmPassword.addEventListener("click", () => toggleVisibility(confirmPasswordField, toggleConfirmPassword));
 });
